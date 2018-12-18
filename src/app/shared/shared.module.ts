@@ -5,7 +5,8 @@ import { MatToolbarModule,
    MatButtonModule, 
    MatCardModule,
    MatInputModule,
-   MatFormFieldModule
+   MatFormFieldModule,
+   MatListModule
    } from '@angular/material';
 @NgModule({
   declarations: [],
@@ -17,6 +18,7 @@ import { MatToolbarModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatListModule,
   ],
   exports:[
     CommonModule,
@@ -26,6 +28,7 @@ import { MatToolbarModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatListModule,
     
   ]
 })
