@@ -8,7 +8,8 @@ import {
   MatInputModule,
   MatFormFieldModule,
   MatListModule,
-  MatGridListModule
+  MatGridListModule,
+  MatSlideToggleModule
 } from '@angular/material';
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import {
     MatFormFieldModule,
     MatListModule,
     MatGridListModule,
+    MatSlideToggleModule,
 
   ],
   exports: [
@@ -34,7 +36,7 @@ import {
     MatFormFieldModule,
     MatListModule,
     MatGridListModule,
-
+    MatSlideToggleModule,
   ]
 })
 export class SharedModule { }

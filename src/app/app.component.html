@@ -1,10 +1,10 @@
-<mat-sidenav-container>
+<mat-sidenav-container [class.myapp-dark-theme]="darkTheme">
   <mat-sidenav #sidebar mode='side'>
     <app-siderbar></app-siderbar>
   </mat-sidenav>
   <div class="site">
     <header>
-      <app-header (toggle)="sidebar.toggle()"></app-header>
+      <app-header (toggle)="sidebar.toggle()" (toggleDark)="swtichTheme($event)"></app-header>
     </header>
     <main>
       <router-outlet></router-outlet>
