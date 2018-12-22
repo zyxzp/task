@@ -4,12 +4,15 @@ export const loadSvgResources = (matIconRegistry: MatIconRegistry, domSanitizer:
     const imgDir='assets/img';
     const sidebarDir=`${imgDir}/sidebar`;
     const daysDir=`${imgDir}/days`;
+    const avatarsDir=`${imgDir}/avatar`;
     matIconRegistry.addSvgIcon('time', domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/time.svg'));
     matIconRegistry.addSvgIcon('day', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
     matIconRegistry.addSvgIcon('month', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/month.svg`));
     matIconRegistry.addSvgIcon('project', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/project.svg`));
     matIconRegistry.addSvgIcon('projects', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/projects.svg`));
     matIconRegistry.addSvgIcon('week', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/week.svg`));
+    //导入svg图标集合
+    matIconRegistry.addSvgIconSetInNamespace('avatars', domSanitizer.bypassSecurityTrustResourceUrl(`${avatarsDir}/avatars.svg`));
     const days=[
         1,2,3,4,5,6,7,8,9,10,
         11,12,13,14,15,16,17,18,19,20,
