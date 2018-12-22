@@ -5,12 +5,14 @@ export const loadSvgResources = (matIconRegistry: MatIconRegistry, domSanitizer:
     const sidebarDir=`${imgDir}/sidebar`;
     const daysDir=`${imgDir}/days`;
     const avatarsDir=`${imgDir}/avatar`;
+    const iconsDir=`${imgDir}/icons`;
     matIconRegistry.addSvgIcon('time', domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/time.svg'));
     matIconRegistry.addSvgIcon('day', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
     matIconRegistry.addSvgIcon('month', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/month.svg`));
     matIconRegistry.addSvgIcon('project', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/project.svg`));
     matIconRegistry.addSvgIcon('projects', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/projects.svg`));
     matIconRegistry.addSvgIcon('week', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/week.svg`));
+    matIconRegistry.addSvgIcon('move', domSanitizer.bypassSecurityTrustResourceUrl(`${iconsDir}/move.svg`));
     //导入svg图标集合
     matIconRegistry.addSvgIconSetInNamespace('avatars', domSanitizer.bypassSecurityTrustResourceUrl(`${avatarsDir}/avatars.svg`));
     const days=[
