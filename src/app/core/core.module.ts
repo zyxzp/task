@@ -1,6 +1,7 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { loadSvgResources } from '../utils/svg.util';
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
+    AppRoutingModule,
   ],
   declarations: [
     HeaderComponent,
@@ -22,6 +24,7 @@ import { loadSvgResources } from '../utils/svg.util';
   exports: [HeaderComponent,
     FooterComponent,
     SiderbarComponent,
+    AppRoutingModule
   ]
 })
 export class CoreModule {

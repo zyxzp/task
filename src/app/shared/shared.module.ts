@@ -19,6 +19,7 @@ import {
   MatNativeDateModule,
   MatRadioModule,
   MatSelectModule,
+  MatSidenavModule,
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import "hammerjs";
@@ -45,6 +46,7 @@ import "hammerjs";
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatSidenavModule
 
   ],
   exports: [
@@ -68,6 +70,7 @@ import "hammerjs";
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatSidenavModule
   ],
   entryComponents:[ConfirmDialogComponent]
 })
