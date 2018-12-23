@@ -1,11 +1,13 @@
-<app-project-item *ngFor="let project of projects" 
-[item]="project" 
-(invite)="handleInvite()"
-(delete)="handleDelete(project)"
-(editProject)="handleEditProject(project)"
-class="card">
-
+<div [@listAnim]="projects.length" class="container">
+  <app-project-item *ngFor="let project of projects" 
+  [item]="project" 
+  (invite)="handleInvite()"
+  (delete)="handleDelete(project)"
+  (editProject)="handleEditProject(project)"
+  class="card">
 </app-project-item>
+</div>
+
 <button mat-fab type="button" class="fab-button" (click)="openNewProjectDiaglog()">
   <mat-icon>add</mat-icon>
 </button>

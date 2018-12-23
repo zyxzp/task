@@ -1,11 +1,8 @@
-import { BrowserModule} from '@angular/platform-browser';
-import { NgModule} from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { CoreModule } from './core/core.module';
-import { MatSidenavModule } from '@angular/material';
-import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
 import { LoginModule } from './login/login.module';
 import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
@@ -16,9 +13,8 @@ import { TaskModule } from './task/task.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    MatSidenavModule,
     CoreModule,
+    SharedModule,
     LoginModule,
     ProjectModule,
     TaskModule
