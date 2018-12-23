@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -15,7 +15,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   </div>
 </form>
   `,
-  styles: [``]
+  styles: [``],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ConfirmDialogComponent implements OnInit {
 

@@ -1,9 +1,10 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter,ChangeDetectionStrategy } from '@angular/core';
 import { getDate } from 'date-fns';
 @Component({
   selector: 'app-siderbar',
   templateUrl: './siderbar.component.html',
-  styleUrls: ['./siderbar.component.scss']
+  styleUrls: ['./siderbar.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class SiderbarComponent implements OnInit {
   today = 'day';
