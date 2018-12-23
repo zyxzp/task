@@ -1,6 +1,8 @@
 <app-project-item *ngFor="let project of projects" 
 [item]="project" 
 (invite)="handleInvite()"
+(delete)="handleDelete(project)"
+(editProject)="handleEditProject(project)"
 class="card">
 
 </app-project-item>
