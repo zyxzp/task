@@ -9,12 +9,18 @@ export class TaskHeaderComponent implements OnInit {
 
   @Input() header: string;
   @Output() newTask = new EventEmitter<void>();
+  @Output() moveAll = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit() {
   }
   newTaskClick() {
     this.newTask.emit();
+  }
+  moveAllClick(){
+
+    this.moveAll.emit();
+
   }
 
 }
