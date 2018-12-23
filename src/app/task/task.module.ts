@@ -5,12 +5,14 @@ import { TaskHeaderComponent } from './task-header/task-header.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @NgModule({
-  declarations: [TaskHomeComponent, TaskHeaderComponent, TaskItemComponent, TaskListComponent],
+  declarations: [TaskHomeComponent, TaskHeaderComponent, TaskItemComponent, TaskListComponent, NewTaskComponent],
   imports: [
     TaskRoutingModule,
     SharedModule
-  ]
+  ],
+  entryComponents:[NewTaskComponent]
 })
 export class TaskModule { }
