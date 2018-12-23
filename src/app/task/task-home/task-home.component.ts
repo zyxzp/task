@@ -13,6 +13,8 @@ export class TaskHomeComponent implements OnInit {
     tasks:[{
       id:1,
       desc:'任务一',
+      completed:true,
+      priority:3,
       owner:{
         id:1,
         name:'zhangsan',
@@ -22,6 +24,8 @@ export class TaskHomeComponent implements OnInit {
     },{
       id:2,
       desc:'任务2',
+      completed:false,
+      priority:2,
       owner:{
         id:2,
         name:'lisi',
@@ -30,7 +34,10 @@ export class TaskHomeComponent implements OnInit {
       dueDate:new Date()
     },{
       id:3,
+      priority:1,
       desc:'任务3',
+      completed:false,
+      reminder:new Date(),
       owner:{
         id:2,
         name:'wangwu',
@@ -44,6 +51,8 @@ export class TaskHomeComponent implements OnInit {
     tasks:[{
       id:2,
       desc:'任务2',
+      priority:1,
+      completed:false,
       owner:{
         id:2,
         name:'lisi',
@@ -52,7 +61,9 @@ export class TaskHomeComponent implements OnInit {
       dueDate:new Date()
     },{
       id:3,
+      priority:1,
       desc:'任务3',
+      completed:false,
       owner:{
         id:2,
         name:'wangwu',
@@ -65,7 +76,9 @@ export class TaskHomeComponent implements OnInit {
     name:'已完成',
     tasks:[{
       id:1,
+      completed:false,
       desc:'任务一',
+      priority:3,
       owner:{
         id:1,
         name:'zhangsan',
@@ -75,6 +88,8 @@ export class TaskHomeComponent implements OnInit {
     },{
       id:2,
       desc:'任务2',
+      completed:false,
+      priority:1,
       owner:{
         id:2,
         name:'lisi',

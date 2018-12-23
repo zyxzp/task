@@ -13,6 +13,7 @@ export const loadSvgResources = (matIconRegistry: MatIconRegistry, domSanitizer:
     matIconRegistry.addSvgIcon('projects', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/projects.svg`));
     matIconRegistry.addSvgIcon('week', domSanitizer.bypassSecurityTrustResourceUrl(`${sidebarDir}/week.svg`));
     matIconRegistry.addSvgIcon('move', domSanitizer.bypassSecurityTrustResourceUrl(`${iconsDir}/move.svg`));
+    matIconRegistry.addSvgIcon('unassigned', domSanitizer.bypassSecurityTrustResourceUrl(`${avatarsDir}/unassigned.svg`));
     //导入svg图标集合
     matIconRegistry.addSvgIconSetInNamespace('avatars', domSanitizer.bypassSecurityTrustResourceUrl(`${avatarsDir}/avatars.svg`));
     const days=[
