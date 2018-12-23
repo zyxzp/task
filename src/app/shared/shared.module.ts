@@ -23,6 +23,7 @@ import {
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import "hammerjs";
+import { DirectiveModule } from '../directive/directive.module';
 @NgModule({
   declarations: [ConfirmDialogComponent],
   imports: [
@@ -46,7 +47,8 @@ import "hammerjs";
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    DirectiveModule,
 
   ],
   exports: [
@@ -70,7 +72,9 @@ import "hammerjs";
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    DirectiveModule,
+
   ],
   entryComponents:[ConfirmDialogComponent]
 })

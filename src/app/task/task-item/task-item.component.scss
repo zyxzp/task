@@ -43,5 +43,9 @@ text-decoration: line-through;
     order:1;
     width: 100%;
     padding: 5px;
-
 }
+.drag-start {
+    opacity: 0.5;
+    border: #ff525b dashed 2px;
+}
+      

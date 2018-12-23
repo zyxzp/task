@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding ,HostListener,ChangeDetectionStrategy} from '@angular/core';
-import { cardAnim } from '../../anims/card.anim';
+import { ItemAnim } from '../../anims/item.anim';
 
 @Component({
-  selector: 'app-project-item',
-  templateUrl: './project-item.component.html',
-  styleUrls: ['./project-item.component.scss'],
+  selector: 'app-task-item',
+  templateUrl: './task-item.component.html',
+  styleUrls: ['./task-item.component.scss'],
   animations: [
-    cardAnim
+    ItemAnim
   ],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
