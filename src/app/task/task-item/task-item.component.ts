@@ -19,8 +19,7 @@ export class TaskItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.avatar=this.item.owner?this.item.owner.avatar:"unassigned";
-    this.avatar = "unassigned";
+    this.avatar=this.item.owner?this.item.owner.avatar:"unassigned";
   }
 
   onItemClick() {
