@@ -1,7 +1,7 @@
 import { Directive, HostListener, ElementRef, Renderer2, Input } from '@angular/core';
 
 @Directive({
-  selector: '[app-draggable][draggedClass]'
+  selector: '[app-draggable]'
 })
 export class DragDirective {
   private _isDraggable = false;

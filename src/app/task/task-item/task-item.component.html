@@ -1,4 +1,4 @@
-<div app-draggable [app-draggable]="true" [draggableClass]="'drag-start'">
+<div [app-draggable]="true" [draggedClass]="'drag-start'">
   <mat-list-item class="container" [@item]="widerpriority" [ngClass]="{
   'priority-normal':item.priority===1,
   'priority-important':item.priority===2,
