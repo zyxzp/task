@@ -21,13 +21,16 @@ import {
   MatSelectModule,
   MatSidenavModule,
 } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import "hammerjs";
 import { DirectiveModule } from '../directive/directive.module';
+import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 @NgModule({
-  declarations: [ConfirmDialogComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -53,6 +56,8 @@ import { DirectiveModule } from '../directive/directive.module';
   ],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -74,8 +79,12 @@ import { DirectiveModule } from '../directive/directive.module';
     MatSelectModule,
     MatSidenavModule,
     DirectiveModule,
-
+    ImageListSelectComponent
   ],
-  entryComponents:[ConfirmDialogComponent]
+  declarations: [
+    ConfirmDialogComponent,
+    ImageListSelectComponent
+  ],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class SharedModule { }

@@ -15,8 +15,7 @@ export class DropDirective {
     private el: ElementRef,
     private rd: Renderer2,
     private service: DragDropService) {
-      this.drag$ = this.service.getDragData().take(1);
-     );
+      // this.drag$ = this.service.getDragData().take(1);
   }
 
   @HostListener('dragenter', ['$event'])
