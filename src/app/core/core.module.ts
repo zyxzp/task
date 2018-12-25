@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SiderbarComponent } from './siderbar/siderbar.component';
 import { loadSvgResources } from '../utils/svg.util';
 @NgModule({
-  imports: [    
+  imports: [
     HttpClientModule,
     SharedModule,
     AppRoutingModule,
@@ -27,6 +27,13 @@ import { loadSvgResources } from '../utils/svg.util';
     FooterComponent,
     SiderbarComponent,
     AppRoutingModule
+  ],
+  providers: [
+    {
+      provide: 'BASE_CONFIG', useValue: {
+        uri: 'http://localhost:3000'
+      }
+    }
   ]
 })
 export class CoreModule {
