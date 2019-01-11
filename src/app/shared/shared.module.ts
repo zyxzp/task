@@ -20,12 +20,14 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatButtonToggleModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import "hammerjs";
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
+import { AgeInputComponent } from './age-input/age-input.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatSelectModule,
     MatSidenavModule,
     DirectiveModule,
+    MatButtonToggleModule,
 
   ],
   exports: [
@@ -78,12 +81,15 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatButtonToggleModule,
     DirectiveModule,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    AgeInputComponent
   ],
   declarations: [
     ConfirmDialogComponent,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    AgeInputComponent
   ],
   entryComponents: [ConfirmDialogComponent]
 })

@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SiderbarComponent } from './siderbar/siderbar.component';
 import { loadSvgResources } from '../utils/svg.util';
+import 'rxjs/operators';
 @NgModule({
   imports: [
     HttpClientModule,
