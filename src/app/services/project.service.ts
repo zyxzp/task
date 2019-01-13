@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../domain';
-import { map, mergeMap, count, bufferCount, switchMap } from 'rxjs/operators';
+import { map, mergeMap, count, bufferCount, switchMap, mapTo } from 'rxjs/operators';
 import { from } from 'rxjs';
 @Injectable()
 export class ProjectService {
@@ -32,13 +32,14 @@ export class ProjectService {
     delete(project: Project) {
         const uri = `${this.config.uri}/${this.domain}/${project.id}`;
         //删除project下列表
-        const delTasks$ = from(project.taskLists)
+        const delTasks$ = from(project.taskLists?project.taskLists:[])
         .pipe(
            mergeMap(listId=>this.http.delete(`${this.config.uri}/taskLists/${listId}`)),
            count()
         );
         return delTasks$.pipe(
-            switchMap(_=>this.http.delete<Project>(uri))
+            switchMap(_=>this.http.delete<Project>(uri)),
+            mapTo(project)
         );
     }
 

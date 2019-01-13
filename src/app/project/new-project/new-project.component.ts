@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject,ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-project',
@@ -8,17 +9,37 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewProjectComponent implements OnInit {
-
-  title:string="";
+  form: FormGroup;
+  title: string = "";
+  coverImgs = [];
   constructor(@Inject(MAT_DIALOG_DATA) private data,
-    private dialogRef: MatDialogRef<NewProjectComponent>) { }
+    private dialogRef: MatDialogRef<NewProjectComponent>,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.title=this.data.title;
-    console.log('accept message:'+this.data);
+    this.coverImgs=this.data.thumbnails;
+    if (this.data.project) {//修改
+      this.form = this.fb.group({
+        name: [this.data.project.name, Validators.required],
+        desc: [this.data.project.desc],
+        coverImg: [this.data.project.coverImg]
+      });
+      this.title = "修改项目";
+    } else {
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        desc: [],
+        coverImg: [this.data.coverImg]
+      });
+      this.title = "创建项目";
+    }
   }
-  onClick() {
-    this.dialogRef.close('return message');
+  onSubmit({ value, valid }, ev: Event) {
+    ev.preventDefault();
+    if (!valid) {
+      return;
+    }
+    this.dialogRef.close(value);
 
   }
 }
