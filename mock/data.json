@@ -1,4 +1,20 @@
 {
+    "projects": [
+        {
+            "id": "1",
+            "name": "项目1",
+            "desc": "这是项目1",
+            "coverImg": "/assets/img/covers/1.jpg",
+            "members":["1","2"]
+        },
+        {
+            "id": "2",
+            "name": "项目2",
+            "desc": "这是项目2",
+            "coverImg": "/assets/img/covers/2.jpg",
+            "members":["1"]
+        }
+    ],
     "quotes": [
         {
             "id": "0",
