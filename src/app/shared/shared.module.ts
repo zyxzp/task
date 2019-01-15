@@ -21,6 +21,7 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatButtonToggleModule,
+  MatChipsModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -28,6 +29,7 @@ import "hammerjs";
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { AgeInputComponent } from './age-input/age-input.component';
+import { ChipsListComponent } from './chips-list/chips-list.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +57,7 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MatSidenavModule,
     DirectiveModule,
     MatButtonToggleModule,
-
+    MatChipsModule,
   ],
   exports: [
     CommonModule,
@@ -82,15 +84,18 @@ import { AgeInputComponent } from './age-input/age-input.component';
     MatSelectModule,
     MatSidenavModule,
     MatButtonToggleModule,
+    MatChipsModule,
     DirectiveModule,
     ImageListSelectComponent,
-    AgeInputComponent
+    AgeInputComponent,
+    ChipsListComponent
   ],
   declarations: [
     ConfirmDialogComponent,
     ImageListSelectComponent,
-    AgeInputComponent
+    AgeInputComponent,
+    ChipsListComponent
   ],
-  entryComponents: [ConfirmDialogComponent]
+  entryComponents: [ConfirmDialogComponent,]
 })
 export class SharedModule { }

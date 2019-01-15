@@ -66,7 +66,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
   handleInvite() {
-    this.dialog.open(InviteComponent);
+    this.dialog.open(InviteComponent), { data: { member: [] } };
   }
   handleDelete(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { title: '删除项目', content: '确认删除选中项目吗?' } });
@@ -75,7 +75,7 @@ export class ProjectListComponent implements OnInit {
       filter(n => n),
       switchMap(_ => this.projectService.delete(project))
     ).subscribe(prj => {
-      this.projects = this.projects.filter(p=>p.id!=prj.id);
+      this.projects = this.projects.filter(p => p.id != prj.id);
       this.cd.markForCheck();
     });
   }
