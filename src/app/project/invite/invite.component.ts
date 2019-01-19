@@ -14,7 +14,7 @@ export class InviteComponent implements OnInit {
     private dialogRef: MatDialogRef<InviteComponent>) { }
 
   ngOnInit() {
-    this.members = [...this.data.member];
+    this.members = [...this.data.members];
   }
   onSubmit(ev: Event, { value, valid }) {
     ev.preventDefault();

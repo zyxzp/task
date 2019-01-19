@@ -66,7 +66,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
   handleInvite() {
-    this.dialog.open(InviteComponent), { data: { member: [] } };
+    this.dialog.open(InviteComponent, { data: { members: [] } });
   }
   handleDelete(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { title: '删除项目', content: '确认删除选中项目吗?' } });
