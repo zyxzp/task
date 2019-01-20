@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
       repeat: ['', Validators.required],
       avatar: [img],
       dateOfBirth:[],
+      identity:[],
     });
   }
 

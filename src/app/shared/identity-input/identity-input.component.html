@@ -1,0 +1,15 @@
+<div style="width:200px;">
+  <mat-select placeholder="证件类型" (change)="onIdTypeChange($event.value)" [(ngModel)]="identity.identityType">
+    <mat-option *ngFor="let type of identityTypes" [value]="type.value">
+      {{type.label}}
+    </mat-option>
+  </mat-select>
+</div>
+<div class="id-input">
+  <mat-form-field class="full-width">
+    <input matInput type="text" placeholder="请输入证件号" 
+    [(ngModel)]="identity.identityNo"
+    (change)="onIdNoChange($event.target.value)">
+    <mat-error>证件号码输入有误</mat-error>
+  </mat-form-field>
+</div>
