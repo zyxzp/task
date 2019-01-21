@@ -1,25 +1,25 @@
 <div class="address-group">
-  <div>
-    <mat-select placeholder="选择省份" (onSelectionChange)="onProvinceChange($event.value)" [(ngModel)]="_address.province">
+  <mat-form-field>
+    <mat-select placeholder="选择省份" (selectionChange)="onProvinceChange($event.value)" [(ngModel)]="_address.province">
       <mat-option *ngFor="let p of provinces$|async" [value]="p">
         {{p}}
       </mat-option>
     </mat-select>
-  </div>
-  <div>
-    <mat-select placeholder="选择市" (onSelectionChange)="onCityChange($event.value)" [(ngModel)]="_address.city">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="选择市" (selectionChange)="onCityChange($event.value)" [(ngModel)]="_address.city">
       <mat-option *ngFor="let c of cities$|async" [value]="c">
         {{c}}
       </mat-option>
     </mat-select>
-  </div>
-  <div>
-    <mat-select placeholder="选择区" (onSelectionChange)="onDistrictChange($event.value)" [(ngModel)]="_address.district">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="选择区" (selectionChange)="onDistrictChange($event.value)" [(ngModel)]="_address.district">
       <mat-option *ngFor="let d of districts$|async" [value]="d">
         {{d}}
       </mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
   <div class="street">
     <mat-form-field class="full-width">
       <input matInput type="text" placeholder="请输入街道" [(ngModel)]="_address.street" (change)="onStreetChange($event.target.value)">
