@@ -8,6 +8,7 @@ import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
 import { AppStoreModule } from './reducers';
 import { CounterComponent } from './counter/counter.component';
+import { AppEffectsModule } from './effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CounterComponent } from './counter/counter.component';
     LoginModule,
     ProjectModule,
     TaskModule,
-    AppStoreModule
+    AppStoreModule,
+    AppEffectsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
