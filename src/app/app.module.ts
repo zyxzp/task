@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
 import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
+import { AppStoreModule } from './reducers';
+import { CounterComponent } from './counter/counter.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +20,8 @@ import { TaskModule } from './task/task.module';
     SharedModule,
     LoginModule,
     ProjectModule,
-    TaskModule
+    TaskModule,
+    AppStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
