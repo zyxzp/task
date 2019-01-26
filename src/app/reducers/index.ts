@@ -10,6 +10,9 @@ import * as fromRouter from '@ngrx/router-store';
 
 import * as fromCounter from './counter.reducer';
 import * as fromQuote from './quote.reducer';
+import * as fromAuth from './auth.reducer';
+
+import { Auth } from '../domain';
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
  * exception will be thrown. This is useful during development mode to
@@ -23,6 +26,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 export interface State {
   count: number;
+  auth: Auth;
   quote: fromQuote.State,
   router: fromRouter.RouterReducerState;
 }
@@ -34,6 +38,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
   router: fromRouter.routerReducer,
+  auth:fromAuth.reducer,
   count: fromCounter.counterReducer,
   quote: fromQuote.reducer
 };
@@ -64,6 +69,13 @@ export const getQuoteState = createSelector(
   selectQuoteState,
   fromQuote.getQuote
 );
+/**
+ * Auth getAuthState
+ */
+export const selectAuthState = createFeatureSelector<State, fromQuote.State>(
+  'auth'
+);
+export const getAuthState= (state: State) => state.auth;
 
 @NgModule({
   imports: [
@@ -84,7 +96,11 @@ export const getQuoteState = createSelector(
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrument({ name: 'task master demo', logOnly: environment.production }),
+      environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+        name: 'task ngrx start'
+      }),
   ],
 })
 export class AppStoreModule { }
