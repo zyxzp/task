@@ -33,7 +33,7 @@ export class AuthService {
      */
     register(user: User): Observable<Auth> {
         user.id = null;
-        const uri = `${this.config}/${this.domain}`;
+        const uri = `${this.config.uri}/${this.domain}`;
         return this.http.get<User[]>(uri, { params: { 'email': user.email } }).pipe(
             switchMap(res => {
                 if (res.length > 0) {
@@ -53,7 +53,7 @@ export class AuthService {
       * @param password 密码（明文），服务器会进行加密处理
     */
     login(username: string, password: string) {
-        const uri = `${this.config}/${this.domain}`;
+        const uri = `${this.config.uri}/${this.domain}`;
         return this.http.get<User[]>(uri, { params: { 'email': username, 'password': password } })
             .pipe(
                 map(res => {
