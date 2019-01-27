@@ -1,30 +1,40 @@
-<form>
+<form [formGroup]="form">
   <h2 mat-dialog-title>{{title}}</h2>
   <div mat-dialog-content>
     <mat-form-field class="full-width">
-      <input matInput type="text" placeholder="task name">
+      <input matInput type="text" placeholder="task name" formControlName="desc">
     </mat-form-field>
-    <mat-radio-group>
+    <mat-radio-group formControlName="priority">
       <mat-radio-button *ngFor="let priority of priorities" [value]="priority.value">
         {{priority.label}}
       </mat-radio-button>
     </mat-radio-group>
+    <div class="full-width">
+      <app-chips-list [label]="'更改执行者'" [multiple]="false" formControlName="owner"></app-chips-list>
+    </div>
     <mat-form-field class="full-width">
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dueDate">
+
       <input [matDatepicker]="dueDatepicker" matInput type="text" placeholder="end date">
       <mat-datepicker-toggle matSuffix [for]="dueDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #dueDatepicker ></mat-datepicker>
+      <mat-datepicker #dueDatepicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input [matDatepicker]="reminderDatepicker" matInput type="text" placeholder="reminder date">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="reminder">
+
+      <input [matDatepicker]="reminderDatepicker" matInput type="text" placeholder="end date">
       <mat-datepicker-toggle matSuffix [for]="reminderDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #reminderDatepicker ></mat-datepicker>
+      <mat-datepicker #reminderDatepicker></mat-datepicker>
+    </mat-form-field>
+    <div class="full-width">
+      <app-chips-list [label]="'更改参与者'" [multiple]="true" formControlName="followers"></app-chips-list>
+    </div>
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="备注" formControlName="remark"></textarea>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button type="button" mat-raised-button color="primary" (click)="onClick()">save</button>
+    <button type="button" mat-raised-button color="primary" (click)="onClick(form,$event)">save</button>
     <button type="button" mat-button mat-dialog-close>cancel</button>
   </div>
 </form>
-

@@ -10,8 +10,8 @@
         [dragData]="list"
         (dropped)="handleMove($event, list)">
     <app-task-header [header]="list.name" 
-    (newTask)="launchNewTaskDialog()"
-    (moveAll)="launchCopyAllTaskDialog()"
+    (newTask)="launchNewTaskDialog(list)"
+    (moveAll)="launchCopyAllTaskDialog(list)"
     (delList)="launchDeleteList(list)"
     (editList)="launchEditList(list)"
     ></app-task-header>

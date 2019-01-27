@@ -14,6 +14,7 @@ import * as fromAuth from './auth.reducer';
 import * as fromProject from './project.reducer';
 import * as fromUser from './user.reducer';
 import * as fromTaskList from './task-list.reducer';
+import * as fromTask from './task.reducer';
 
 import { Auth } from '../domain';
 /**
@@ -33,8 +34,9 @@ export interface State {
   quote: fromQuote.State,
   router: fromRouter.RouterReducerState;
   projects: fromProject.State;
-  users:fromUser.State;
-  taskLists:fromTaskList.State
+  users: fromUser.State;
+  taskLists: fromTaskList.State
+  tasks: fromTask.State
 }
 
 /**
@@ -48,8 +50,9 @@ export const reducers: ActionReducerMap<State> = {
   count: fromCounter.counterReducer,
   quote: fromQuote.reducer,
   projects: fromProject.reducer,
-  users:fromUser.reducer,
-  taskLists:fromTaskList.reducer
+  users: fromUser.reducer,
+  taskLists: fromTaskList.reducer,
+  tasks: fromTask.reducer
 };
 
 // console.log all actions
@@ -86,12 +89,39 @@ export const getAuth = (state: State) => state.auth;
 export const getProjectsState = (state: State) => state.projects;
 export const getUserState = (state: State) => state.users;
 export const getTaskListState = (state: State) => state.taskLists;
+export const getTaskState = (state: State) => state.tasks;
 
 export const getUserEntities = createSelector(getUserState, fromUser.getEntities);
+export const getUsers = createSelector(getUserState, fromUser.getUsers);
+export const getProjects = createSelector(getProjectsState, fromProject.getAll);
 export const getTaskLists = createSelector(getTaskListState, fromTaskList.getSelected);
-export const getProjects = createSelector(getProjectsState,  fromProject.getAll);
+export const getTasks = createSelector(getTaskState, fromTask.getTasks);
+export const getTasksWithOwners = createSelector(
+  getTasks, getUserEntities, (tasks, userEntities) => {
+    return tasks.map(task => {
+      return {
+        ...task,
+        owner: userEntities[task.id],
+        participants: task.participantIds.map(id => userEntities[id])
+      };
+    })
+  });
+export const getTasksByLists = createSelector(getTaskLists, getTasksWithOwners, (lists, tasks) => {
+  return lists.map((list) => {
+    return {
+      ...list,
+      taskIds: tasks.filter(task => task.taskListId == list.id)
+           .map(task=>task.id).reduce((arr,t)=>[...arr,t],[])
+    }
+  });
+});
+// id?: string;
+// name: string;
+// projectId: string;SSS
+// order: number;
+// taskIds?: string[];
 
-export const getProjectMembers=(projectId: string) => createSelector(getProjectsState, getUserEntities, (state, entities) => {
+export const getProjectMembers = (projectId: string) => createSelector(getProjectsState, getUserEntities, (state, entities) => {
   return state.entities[projectId].members.map(id => entities[id]);
 });
 @NgModule({

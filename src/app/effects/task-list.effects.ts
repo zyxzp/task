@@ -5,7 +5,7 @@ import { Action, Store } from '@ngrx/store';
 
 import * as actions from '../actions/task-list.actions';
 import * as prjActions from '../actions/project.actions';
-// import * as taskActions from '../actions/task.actions';
+import * as taskActions from '../actions/task.actions';
 import * as fromRoot from '../reducers';
 import { Task, TaskList } from '../domain';
 import { Observable, of } from 'rxjs';
@@ -99,11 +99,11 @@ export class TaskListEffects {
     //         .catch(err => of(new actions.SwapOrderFailAction(err)))
     //     );
 
-    //   @Effect()
-    //   loadTasksInList$: Observable<Action> = this.actions$
-    //     .ofType(actions.ActionTypes.LOADS_SUCCESS)
-    //     .map(toPayload)
-    //     .map(lists => new taskActions.LoadTasksInListsAction(lists));
+      @Effect()
+      loadTasksInList$: Observable<Action> = this.actions$.pipe(
+        ofType<actions.LoadSuccessAction>(actions.ActionTypes.LOAD_SUCCESS),
+        map(action => new taskActions.LoadAction(action.payload))
+      );
 
     /**
      * 任务列表的 Effects

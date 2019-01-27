@@ -33,7 +33,7 @@ export class ProjectListComponent implements OnInit {
     this.store.dispatch(new projectActions.LoadAction());
     this.projects$ = this.store.pipe(select(fromRoot.getProjects));
     this.listAnim$ = this.projects$.pipe(map(p => p.length));
-    this.projects$.subscribe(v=>{
+    this.projects$.subscribe(v => {
       console.log(v);
     })
   }
@@ -66,15 +66,15 @@ export class ProjectListComponent implements OnInit {
   }
   handleInvite(project) {
     let members = [];
-    this.store.pipe(select(fromRoot.getProjectMembers(project.id)),
-      take(1))
-      .subscribe(m => members = m);
-    const dialogRef = this.dialog.open(InviteComponent, { data: { members: members } });
-    dialogRef.afterClosed().pipe(
-      take(1),
-      filter(n => n),
+    this.store.pipe(
+      select(fromRoot.getProjectMembers(project.id)),
+      map(users => this.dialog.open(InviteComponent, { data: { members: users } })),
+      switchMap(dialogRef => dialogRef.afterClosed().pipe(
+        take(1),
+        filter(n => n),
+      ))
     ).subscribe(users => {
-      this.store.dispatch(new projectActions.InviteAction({projectId:project.id,members:users}));
+      this.store.dispatch(new projectActions.InviteAction({ projectId: project.id, members: users }));
     });
   }
   handleDelete(project) {
@@ -86,7 +86,7 @@ export class ProjectListComponent implements OnInit {
       this.store.dispatch(new projectActions.DeleteAction(project));
     });
   }
-  handleSelected(project:Project){
+  handleSelected(project: Project) {
     this.store.dispatch(new projectActions.SelectProjectAction(project));
   }
 }

@@ -32,7 +32,48 @@
       "id": 4
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "desc": "t1",
+      "priority": 3,
+      "owner": [
+        {
+          "password": "123",
+          "name": "李四",
+          "avatar": "avatars:svg-2",
+          "email": "lisi@163.com",
+          "id": "1",
+          "projectIds": [
+            "1"
+          ]
+        }
+      ],
+      "followers": [
+        {
+          "password": "Ls123456",
+          "name": "李宁",
+          "avatar": "avatars:svg-2",
+          "email": "lisi@163.com",
+          "id": "2",
+          "projectIds": [
+            "1",
+            "2"
+          ]
+        }
+      ],
+      "reminder": "",
+      "dueDate": "",
+      "remark": "",
+      "ownerId": "1",
+      "participantIds": [
+        "2"
+      ],
+      "completed": false,
+      "taskListId": 2,
+      "createDate": "2019-01-27T15:32:45.950Z",
+      "id": 1
+    }
+  ],
   "projects": [
     {
       "id": "1",

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, from } from 'rxjs';
 import { Action, Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, switchMap, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as actions from '../actions/project.actions';
+import * as userActions from '../actions/user.actions';
 import * as taskListActions from '../actions/task-list.actions';
 
 import { Router } from '@angular/router';
@@ -32,6 +33,14 @@ export class ProjectEffects {
                     map(projects => new actions.LoadSuccessAction(projects)),
                     catchError((err) => of(new actions.LoadFailAction(JSON.stringify(err)))))
             )
+        );
+
+    @Effect()
+    loadSuccess$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.LoadSuccessAction>(actions.ActionTypes.LOAD_SUCCESS),
+            switchMap((action) => from(action.payload).pipe(map(p => p.id))),
+            map(projectId => new userActions.LoadUsersByPrjAction(projectId))
         );
     @Effect()
     addProject$: Observable<Action> = this.actions$
@@ -95,6 +104,40 @@ export class ProjectEffects {
                         catchError((err) => of(new actions.InviteFailAction(JSON.stringify(err))))
                     )
             }
+            )
+        );
+    @Effect()
+    addUserProject$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.AddSuccessAction>(actions.ActionTypes.ADD_SUCCESS),
+            map((action) => action.payload.id),
+            withLatestFrom(this.store.pipe(
+                select(fromRoot.getAuth),
+                map(auth => auth.user)),
+                (projectId, user) => {
+                    return new userActions.AddUserProjectAction(
+                        { user: user, projectId: projectId })
+                },
+            )
+        );
+    @Effect()
+    updateUserProject$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.InviteSuccessAction>(actions.ActionTypes.INVITE_SUCCESS),
+            map((action) => new userActions.BatchUpdateUserProjectAction(action.payload)),
+        );
+    @Effect()
+    removeUserProject$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.DeleteSuccessAction>(actions.ActionTypes.DELETE_SUCCESS),
+            map((action) => action.payload.id),
+            withLatestFrom(this.store.pipe(
+                select(fromRoot.getAuth),
+                map(auth => auth.user)),
+                (projectId, user) => {
+                    return new userActions.RemoveUserProjectAction(
+                        { user: user, projectId: projectId })
+                },
             )
         );
 }
