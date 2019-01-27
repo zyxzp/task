@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "password": "Ls123456",
+      "password": "123",
       "name": "李四",
       "avatar": "avatars:svg-2",
       "email": "lisi@163.com",
@@ -36,25 +36,14 @@
       ]
     },
     {
-      "id": "2",
-      "name": "项目3333",
-      "desc": "",
-      "coverImg": "/assets/img/covers/3.jpg",
+      "name": "11",
+      "desc": null,
+      "coverImg": "/assets/img/covers/35.jpg",
       "members": [
-        "1"
-      ]
-    },
-    {
-      "name": "sad",
-      "desc": "as",
-      "coverImg": "/assets/img/covers/2.jpg",
-      "id": "QvzM28y"
-    },
-    {
-      "name": "asdsa",
-      "desc": "dasd",
-      "coverImg": "/assets/img/covers/6.jpg",
-      "id": "zEyZDtH"
+        "1",
+        "2"
+      ],
+      "id": "KWJAFnx"
     }
   ],
   "quotes": [

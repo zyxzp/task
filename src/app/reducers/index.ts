@@ -11,6 +11,8 @@ import * as fromRouter from '@ngrx/router-store';
 import * as fromCounter from './counter.reducer';
 import * as fromQuote from './quote.reducer';
 import * as fromAuth from './auth.reducer';
+import * as fromProject from './project.reducer';
+import * as fromUser from './user.reducer';
 
 import { Auth } from '../domain';
 /**
@@ -29,6 +31,8 @@ export interface State {
   auth: Auth;
   quote: fromQuote.State,
   router: fromRouter.RouterReducerState;
+  projects: fromProject.State;
+  users:fromUser.State;
 }
 
 /**
@@ -38,9 +42,11 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
   router: fromRouter.routerReducer,
-  auth:fromAuth.reducer,
+  auth: fromAuth.reducer,
   count: fromCounter.counterReducer,
-  quote: fromQuote.reducer
+  quote: fromQuote.reducer,
+  projects: fromProject.reducer,
+  users:fromUser.reducer
 };
 
 // console.log all actions
@@ -63,20 +69,32 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   : [];
 
 
-//获取quote.reducer state数据
+//从全局获取quote state数据
 export const selectQuoteState = createFeatureSelector<fromQuote.State>('quote');
-export const getQuoteState = createSelector(
+export const getQuote = createSelector(
   selectQuoteState,
   fromQuote.getQuote
 );
 /**
  * Auth getAuthState
  */
-export const selectAuthState = createFeatureSelector<State, fromQuote.State>(
-  'auth'
-);
-export const getAuthState= (state: State) => state.auth;
 
+export const getAuth = (state: State) => state.auth;
+export const getProjectsState = (state: State) => state.projects;
+export const getUserState = (state: State) => state.users;
+
+const getUserEntities = createSelector(getUserState, fromUser.getEntities);
+
+export const selectProjectState = createFeatureSelector<State, fromProject.State>(
+  'projects'
+);
+export const getProjects = createSelector(
+  selectProjectState,
+  fromProject.getAll
+);
+export const getProjectMembers=(projectId: string) => createSelector(getProjectsState, getUserEntities, (state, entities) => {
+  return state.entities[projectId].members.map(id => entities[id]);
+});
 @NgModule({
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -96,7 +114,7 @@ export const getAuthState= (state: State) => state.auth;
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-      environment.production
+    environment.production
       ? []
       : StoreDevtoolsModule.instrument({
         name: 'task ngrx start'

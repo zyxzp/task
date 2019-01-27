@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth$=this.store.pipe(select(fromRoot.getAuthState));
+    this.auth$=this.store.pipe(select(fromRoot.getAuth));
   }
   openSideBar() {
     this.toggle.emit();

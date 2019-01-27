@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     //2、会被quote.effects截获，在effect中调service,成功后会将数据保存到store中
     store.dispatch(new quoteActions.LoadAction());
     //从store中获取数据，
-    this.quote$ = this.store.pipe(select(fromRoot.getQuoteState));
+    this.quote$ = this.store.pipe(select(fromRoot.getQuote));
   }
 
   ngOnInit() {

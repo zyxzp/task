@@ -2,7 +2,7 @@
   <span class="chip-list">{{label}}</span>
   <mat-chip-list>
     <mat-chip selected="true" color="primary" *ngFor="let member of items">
-      {{item.name}}
+      {{member.name}}
       <span class="remove-tag" (click)="removeMember(member)">x</span>
     </mat-chip>
   </mat-chip-list>

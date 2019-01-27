@@ -9,6 +9,10 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/domain';
 import * as _ from 'lodash';
 import { switchMap, filter, map, take } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as projectActions from '../../actions/project.actions';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -18,18 +22,17 @@ import { switchMap, filter, map, take } from 'rxjs/operators';
 })
 export class ProjectListComponent implements OnInit {
 
-  projects: Project[] = [];
+  projects$: Observable<Project[]>;
+  listAnim$: Observable<number>;
   @HostBinding('@routeAnim') state;
   constructor(private dialog: MatDialog,
     private cd: ChangeDetectorRef,
-    private projectService: ProjectService) { }
+    private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.projectService.getProject("1")
-      .subscribe(res => {
-        this.projects = res;
-        this.cd.markForCheck();
-      });
+    this.store.dispatch(new projectActions.LoadAction());
+    this.projects$ = this.store.pipe(select(fromRoot.getProjects));
+    this.listAnim$ = this.projects$.pipe(map(p => p.length));
   }
   openNewProjectDiaglog() {
     const selectedImg = `/assets/img/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
@@ -38,11 +41,8 @@ export class ProjectListComponent implements OnInit {
       take(1),//减少取消订阅操作，只取一次，自动取消订阅
       filter(n => n),//判断是否为true,对话框关闭状态是否是提交状态
       map(val => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) })),
-      switchMap(v => this.projectService.add(v))
     ).subscribe(project => {
-      console.log(project);
-      this.projects = [...this.projects, project];
-      this.cd.markForCheck();
+      this.store.dispatch(new projectActions.AddAction(project));
     });
   }
   private getThumbnails() {
@@ -57,26 +57,30 @@ export class ProjectListComponent implements OnInit {
       take(1),
       filter(n => n),
       map(val => ({ ...val, id: project.id, coverImg: this.buildImgSrc(val.coverImg) })),
-      switchMap(v => this.projectService.update(v))
     ).subscribe(project => {
-      console.log(project);
-      const index = this.projects.map(p => p.id).indexOf(project.id);
-      this.projects = [...this.projects.slice(0, index), project, ...this.projects.slice(index + 1)];
-      this.cd.markForCheck();
+      this.store.dispatch(new projectActions.UpdateAction(project));
     });
   }
-  handleInvite() {
-    this.dialog.open(InviteComponent, { data: { members: [] } });
+  handleInvite(project) {
+    let members = [];
+    this.store.pipe(select(fromRoot.getProjectMembers(project.id)),
+      take(1))
+      .subscribe(m => members = m);
+    const dialogRef = this.dialog.open(InviteComponent, { data: { members: members } });
+    dialogRef.afterClosed().pipe(
+      take(1),
+      filter(n => n),
+    ).subscribe(users => {
+      this.store.dispatch(new projectActions.InviteAction({projectId:project.id,members:users}));
+    });
   }
   handleDelete(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { title: '删除项目', content: '确认删除选中项目吗?' } });
     dialogRef.afterClosed().pipe(
       take(1),
       filter(n => n),
-      switchMap(_ => this.projectService.delete(project))
-    ).subscribe(prj => {
-      this.projects = this.projects.filter(p => p.id != prj.id);
-      this.cd.markForCheck();
+    ).subscribe(_ => {
+      this.store.dispatch(new projectActions.DeleteAction(project));
     });
   }
 }

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, catchError, switchMap, filter, mergeMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap, mergeMap, tap } from 'rxjs/operators';
 import * as actions from '../actions/auth.actions';
-import { Auth, User } from '../domain';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -24,10 +23,10 @@ export class AuthEffects {
             ofType<actions.LoginAction>(actions.ActionTypes.LOGIN),
             mergeMap(action => this.authService.login(action.payload.email, action.payload.password)
                 .pipe(
-                    map(auth =>{
+                    map(auth => {
                         this.router.navigate(['/project']);
                         return new actions.LoginSuccessAction(auth);
-                    } ),
+                    }),
                     catchError((err) => of(new actions.LoginFailAction(JSON.stringify(err))))
                 )
             )
@@ -47,10 +46,7 @@ export class AuthEffects {
     logout$ = this.actions$
         .pipe(
             ofType<actions.LogoutAction>(actions.ActionTypes.LOGOUT),
-            tap(() => {
-                debugger
-                this.router.navigate(['/']);
-            }
+            tap(() => this.router.navigate(['/'])
             )
         );
 }
