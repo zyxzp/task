@@ -1,6 +1,8 @@
 <div [@listAnim]="listAnim$|async" class="container">
   <app-project-item *ngFor="let project of (projects$|async)"
    [item]="project"
+   
+    (onSelected)="handleSelected(project)"
     (invite)="handleInvite(project)"
     (delete)="handleDelete(project)"
     (editProject)="handleEditProject(project)"

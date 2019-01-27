@@ -47,7 +47,11 @@ const loadProject = (state, action) => {
         .mapValues(o => o)
         .value();
     const newEntities = newIds.reduce((entities, id: string) => ({ ...entities, [id]: incomingEntites[id] }), {});
-    return { ...state, entities: newEntities };
+    return {
+        ...state,
+        entities: newEntities,
+        ids: newIds
+    };
 }
 export function reducer(state = initialState, action: actions.Actions) {
     switch (action.type) {

@@ -17,7 +17,6 @@ export class TaskListService {
 
 
     add(taskList: TaskList) {
-        taskList.id = null;
         const uri = `${this.config.uri}/${this.domain}`;
         return this.http
             .post<TaskList>(uri, JSON.stringify(taskList), { headers: this.headers });

@@ -33,6 +33,9 @@ export class ProjectListComponent implements OnInit {
     this.store.dispatch(new projectActions.LoadAction());
     this.projects$ = this.store.pipe(select(fromRoot.getProjects));
     this.listAnim$ = this.projects$.pipe(map(p => p.length));
+    this.projects$.subscribe(v=>{
+      console.log(v);
+    })
   }
   openNewProjectDiaglog() {
     const selectedImg = `/assets/img/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
@@ -82,5 +85,8 @@ export class ProjectListComponent implements OnInit {
     ).subscribe(_ => {
       this.store.dispatch(new projectActions.DeleteAction(project));
     });
+  }
+  handleSelected(project:Project){
+    this.store.dispatch(new projectActions.SelectProjectAction(project));
   }
 }

@@ -13,6 +13,7 @@ import * as fromQuote from './quote.reducer';
 import * as fromAuth from './auth.reducer';
 import * as fromProject from './project.reducer';
 import * as fromUser from './user.reducer';
+import * as fromTaskList from './task-list.reducer';
 
 import { Auth } from '../domain';
 /**
@@ -33,6 +34,7 @@ export interface State {
   router: fromRouter.RouterReducerState;
   projects: fromProject.State;
   users:fromUser.State;
+  taskLists:fromTaskList.State
 }
 
 /**
@@ -46,7 +48,8 @@ export const reducers: ActionReducerMap<State> = {
   count: fromCounter.counterReducer,
   quote: fromQuote.reducer,
   projects: fromProject.reducer,
-  users:fromUser.reducer
+  users:fromUser.reducer,
+  taskLists:fromTaskList.reducer
 };
 
 // console.log all actions
@@ -82,16 +85,12 @@ export const getQuote = createSelector(
 export const getAuth = (state: State) => state.auth;
 export const getProjectsState = (state: State) => state.projects;
 export const getUserState = (state: State) => state.users;
+export const getTaskListState = (state: State) => state.taskLists;
 
-const getUserEntities = createSelector(getUserState, fromUser.getEntities);
+export const getUserEntities = createSelector(getUserState, fromUser.getEntities);
+export const getTaskLists = createSelector(getTaskListState, fromTaskList.getSelected);
+export const getProjects = createSelector(getProjectsState,  fromProject.getAll);
 
-export const selectProjectState = createFeatureSelector<State, fromProject.State>(
-  'projects'
-);
-export const getProjects = createSelector(
-  selectProjectState,
-  fromProject.getAll
-);
 export const getProjectMembers=(projectId: string) => createSelector(getProjectsState, getUserEntities, (state, entities) => {
   return state.entities[projectId].members.map(id => entities[id]);
 });

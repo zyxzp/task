@@ -1,5 +1,5 @@
 <div class="task-lists">
-  <app-task-list class="list-container" *ngFor="let list of lists"
+  <app-task-list class="list-container" *ngFor="let list of lists$|async"
   app-droppable
   [ngStyle]="{'order': list.order}"
         [dropTags]="['task-item', 'task-list']"
@@ -21,6 +21,6 @@
     [avatar]=""></app-task-item>
   </app-task-list>
 </div>
-<button class="fab-button" mat-fab type="button" (click)="openNewListDialog()">
+<button class="fab-button" mat-fab type="button" (click)="openNewListDialog($event)">
   <mat-icon>add</mat-icon>
 </button>

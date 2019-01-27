@@ -4,12 +4,13 @@ import { Action, Store, select } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, switchMap, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as actions from '../actions/project.actions';
+import * as taskListActions from '../actions/task-list.actions';
 
 import { Router } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../domain';
 import * as fromRoot from '../reducers';
-import { projection } from '@angular/core/src/render3';
+
 @Injectable()
 export class ProjectEffects {
 
@@ -26,7 +27,7 @@ export class ProjectEffects {
         .pipe(
             ofType<actions.LoadAction>(actions.ActionTypes.LOAD),
             withLatestFrom(this.store.pipe(select(fromRoot.getAuth))),
-            switchMap(([_, auth]) => this.projectService.getProject(auth.userId)
+            switchMap(([_, auth]) => this.projectService.getProject(auth.user.id)
                 .pipe(
                     map(projects => new actions.LoadSuccessAction(projects)),
                     catchError((err) => of(new actions.LoadFailAction(JSON.stringify(err)))))
@@ -73,20 +74,27 @@ export class ProjectEffects {
             ofType<actions.SelectProjectAction>(actions.ActionTypes.SELECT_PROJECT),
             map((action) => {
                 this.router.navigate([`/tasklists/${action.payload.id}`]);
-                return null;
+                return new taskListActions.LoadAction(action.payload.id);
             })
         );
-        @Effect()
-        invite$: Observable<Action> = this.actions$
-            .pipe(
-                ofType<actions.InviteAction>(actions.ActionTypes.INVITE),
-                switchMap((action) => {
-                    debugger
-                    return this.projectService.invite(action.payload.projectId,action.payload.members)
+    @Effect()
+    loadTaskLists$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.SelectProjectAction>(actions.ActionTypes.SELECT_PROJECT),
+            map((action) => new taskListActions.LoadAction(action.payload.id))
+        );
+    @Effect()
+    invite$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<actions.InviteAction>(actions.ActionTypes.INVITE),
+            switchMap((action) => {
+                debugger
+                return this.projectService.invite(action.payload.projectId, action.payload.members)
                     .pipe(
                         map(project => new actions.InviteSuccessAction(project)),
                         catchError((err) => of(new actions.InviteFailAction(JSON.stringify(err))))
-                    )}
-                )
-            );
+                    )
+            }
+            )
+        );
 }

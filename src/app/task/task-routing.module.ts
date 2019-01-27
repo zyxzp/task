@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TaskHomeComponent } from './task-home/task-home.component';
 
 const routes: Routes = [
-    { path: 'task', component: TaskHomeComponent }
+    { path: 'tasklists/:id', component: TaskHomeComponent }
 ];
 
 @NgModule({
