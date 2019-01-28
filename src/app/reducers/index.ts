@@ -111,7 +111,8 @@ export const getTasksByLists = createSelector(getTaskLists, getTasksWithOwners, 
     return {
       ...list,
       taskIds: tasks.filter(task => task.taskListId == list.id)
-           .map(task=>task.id).reduce((arr,t)=>[...arr,t],[])
+        .map(task => task.id).reduce((arr, t) => [...arr, t], []),
+      tasks: tasks.filter(task => task.taskListId == list.id)   
     }
   });
 });
