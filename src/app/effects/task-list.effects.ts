@@ -89,15 +89,16 @@ export class TaskListEffects {
     //     .map(toPayload)
     //     .map(prj => new prjActions.UpdateListsAction(prj));
 
-    //   @Effect()
-    //   swapOrder$: Observable<Action> = this.actions$
-    //     .ofType(actions.ActionTypes.SWAP_ORDER)
-    //     .map(toPayload)
-    //     .switchMap(({src, target}) =>
-    //       this.service$.swapOrder(src, target)
-    //         .map(tls => new actions.SwapOrderSuccessAction(tls))
-    //         .catch(err => of(new actions.SwapOrderFailAction(err)))
-    //     );
+      @Effect()
+      swapOrder$: Observable<Action> = this.actions$.pipe(
+        ofType<actions.SwapAction>(actions.ActionTypes.SWAP),
+        switchMap((action) =>
+          this.service$.swapOrder(action.payload.src, action.payload.target).pipe(
+            map(tls => new actions.SwapSuccessAction(tls)),
+            catchError(err => of(new actions.SwapFailAction(JSON.stringify(err))))
+          )           
+        )
+      );
 
       @Effect()
       loadTasksInList$: Observable<Action> = this.actions$.pipe(
