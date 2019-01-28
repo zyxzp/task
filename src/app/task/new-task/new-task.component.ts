@@ -47,7 +47,11 @@ export class NewTaskComponent implements OnInit {
   onClick({ value, valid }, ev: Event) {
     if (!valid) { return false; }
     this.dialogRef.close({
-      ...value,
+      desc:value.desc,
+      priority:value.priority,
+      reminder:value.reminder,
+      remark:value.remark,
+      dueDate:value.dueDate,
       ownerId:value.owner.length>0?value.owner[0].id:null,
       participantIds:value.followers.map(f=>f.id)
     });
