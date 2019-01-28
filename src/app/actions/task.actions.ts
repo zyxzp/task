@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Task } from '../domain';
-import { TaskList } from '../task/task-home/task-home.component';
-
+import { TaskList } from '../domain/task-list.model';
 
 export enum ActionTypes {
     LOAD = '[Task Component] Load',
