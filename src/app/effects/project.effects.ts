@@ -86,12 +86,7 @@ export class ProjectEffects {
                 return new taskListActions.LoadAction(action.payload.id);
             })
         );
-    @Effect()
-    loadTaskLists$: Observable<Action> = this.actions$
-        .pipe(
-            ofType<actions.SelectProjectAction>(actions.ActionTypes.SELECT_PROJECT),
-            map((action) => new taskListActions.LoadAction(action.payload.id))
-        );
+
     @Effect()
     invite$: Observable<Action> = this.actions$
         .pipe(
