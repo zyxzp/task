@@ -2,7 +2,7 @@ import * as actions from '../actions/auth.actions';
 import { Auth } from '../domain';
 
 
-const initialState: Auth = {};
+export const initialState: Auth = {};
 
 export function reducer(state = initialState, action: actions.Actions): Auth {
     switch (action.type) {
