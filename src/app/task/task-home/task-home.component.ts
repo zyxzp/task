@@ -76,11 +76,6 @@ export class TaskHomeComponent implements OnInit {
     ).subscribe(res => {
       this.store.dispatch(new taskActions.UpdateAction({ ...res, id: task.id }))
     });
-
-
-  }
-  getTaskByIds(taskIds) {
-    return this.store.pipe(select(fromRoot.getTaskByIds(taskIds)));
   }
   //列表相关操作
   //新建任务列表

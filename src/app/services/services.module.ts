@@ -7,12 +7,21 @@ import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 
+export {
+  QuoteService,
+  ProjectService,
+  TaskListService,
+  TaskService,
+  UserService,
+  AuthService,
+  AuthGuardService
+}
 @NgModule()
-export class ServicesModule { 
-  static forRoot():ModuleWithProviders{
+export class ServicesModule {
+  static forRoot(): ModuleWithProviders {
     return {
-      ngModule:ServicesModule,
-      providers:[
+      ngModule: ServicesModule,
+      providers: [
         QuoteService,
         ProjectService,
         TaskListService,

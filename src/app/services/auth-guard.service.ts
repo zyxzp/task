@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { map, defaultIfEmpty } from 'rxjs/operators';
 
@@ -15,17 +15,23 @@ export class AuthGuardService implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> {
-        // this.store$.pipe(select(fromRoot.getAuthState),
-        //     map(auth => {
-        //         const result = auth.token != null && auth.token != undefined;
-        //         if (result) {
-        //             this.router.navigate(['/login']);
-        //         }
-        //         return of(result);
-        //     }),
-        //     defaultIfEmpty(of(false))
-        //     )
-        return of(false);
+        return this.checkAuth();
+    }
+
+    checkAuth(): Observable<boolean> {
+        return this.store$.pipe(
+            select(fromRoot.getAuth),
+            map(auth => {
+                const result = auth.token !== undefined && auth.token !== null;
+                if (!result) {
+                    this.router.navigate(['/login']);
+                    //   this.store$.dispatch(go(['/login']));
+                }
+                return result;
+            }),
+            defaultIfEmpty(false)
+        );
+
     }
 }
 
