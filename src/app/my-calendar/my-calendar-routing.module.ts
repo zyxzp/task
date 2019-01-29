@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TaskHomeComponent } from './task-home/task-home.component';
+import { CalendarHomeComponent } from './calendar-home/calendar-home.component';
 
 const routes: Routes = [
-    { path: '', component: TaskHomeComponent }
+    { path: '', component: CalendarHomeComponent }
 ];
 
 @NgModule({
     imports: [CommonModule, RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class TaskRoutingModule {}
+export class MyCalendarRoutingModule {}

@@ -18,3 +18,5 @@ export const slideToRight = trigger('routeAnim', [
       ])
     ]),
   ]);
+  export const defaultRouteAnim = slideToRight;
+  

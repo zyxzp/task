@@ -24,8 +24,9 @@ export class AuthEffects {
             mergeMap(action => this.authService.login(action.payload.email, action.payload.password)
                 .pipe(
                     map(auth => {
-                        this.router.navigate(['/project']);
-                        return new actions.LoginSuccessAction(auth);
+                        const res = new actions.LoginSuccessAction(auth);
+                        this.router.navigate(['/projects']);
+                        return res;
                     }),
                     catchError((err) => of(new actions.LoginFailAction(JSON.stringify(err))))
                 )

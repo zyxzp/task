@@ -4,8 +4,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
-import { ProjectModule } from './project/project.module';
-import { TaskModule } from './task/task.module';
+import { ProjectModule } from './project';
+import { TaskModule } from './task';
 import { AppStoreModule } from './reducers';
 import { CounterComponent } from './counter/counter.component';
 import { AppEffectsModule } from './effects';
@@ -20,8 +20,6 @@ import { AppEffectsModule } from './effects';
     CoreModule,
     SharedModule,
     LoginModule,
-    ProjectModule,
-    TaskModule,
     AppStoreModule,
     AppEffectsModule
   ],

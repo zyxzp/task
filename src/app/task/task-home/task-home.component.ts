@@ -9,7 +9,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { pluck, take, filter, map, switchMap } from 'rxjs/operators';
+import { pluck, take, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as taskListActions from '../../actions/task-list.actions';
 import * as taskActions from '../../actions/task.actions';
 import { TaskList, Task } from 'src/app/domain';
@@ -30,7 +30,7 @@ export class TaskHomeComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute) {
-    this.projectId$ = this.route.paramMap.pipe(pluck('id'));
+    this.projectId$ = this.route.paramMap.pipe(map(p=>p.get('id')));
     this.lists$ = this.store.pipe(select(fromRoot.getTasksByLists));
   }
 
@@ -42,19 +42,21 @@ export class TaskHomeComponent implements OnInit {
     user$.pipe(
       take(1),
       map(user => this.dialog.open(NewTaskComponent, { data: { title: '新建任务', owner: user } })),
-      switchMap(dialogRef => dialogRef.afterClosed().pipe(
-        take(1),
-        filter(n => n)
-      ))
-    ).subscribe((task: Task) => {
-      this.store.dispatch(new taskActions.AddAction(
-        {
-          ...task,
-          completed: false,
-          taskListId: list.id,
-          createDate: new Date
-        }));
-    });
+      switchMap(dialogRef => dialogRef.afterClosed()),
+      take(1),
+      withLatestFrom(this.projectId$, (val, projectId) => ({
+        ...val,
+        projectId: projectId
+      })
+      )).subscribe((task: Task) => {
+        this.store.dispatch(new taskActions.AddAction(
+          {
+            ...task,
+            completed: false,
+            taskListId: list.id,
+            createDate: new Date
+          }));
+      });
   }
   launchCopyAllTaskDialog(list) {
     this.lists$.pipe(
